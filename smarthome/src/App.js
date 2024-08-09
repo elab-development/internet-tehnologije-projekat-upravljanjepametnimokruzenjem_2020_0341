@@ -7,7 +7,6 @@ import Dashboard from './pages/Dashboard';
 import NotFound from './pages/NotFound';
 
 function App() {
-  return <div>SmartHome</div>;
   return (
     <BrowserRouter>
       <Routes>
