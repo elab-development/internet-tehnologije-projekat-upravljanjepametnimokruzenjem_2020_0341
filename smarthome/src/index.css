@@ -20,4 +20,33 @@
 
 .bg-background {
   background-image: url('./assets/background.jpg');
+  background-position: bottom;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.bg-primary {
+  background-color: #135993;
+}
+.bg-secondary {
+  background-color: #588bc9;
+}
+.bg-tertiary {
+  background-color: #ddf2ff;
+}
+.bg-elements {
+  background-color: #dca11d;
+}
+
+.text-primary {
+  color: #135993;
+}
+.text-secondary {
+  color: #588bc9;
+}
+.text-tertiary {
+  color: #ddf2ff;
+}
+.text-elements {
+  color: #dca11d;
 }
