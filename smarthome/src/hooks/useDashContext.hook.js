@@ -6,12 +6,20 @@ export const useDashContext = () => {
   if (!context) {
     throw new Error('No Context provided!');
   }
-  const { loggedInUser, setLoggedInUser, dashboardView, setDashboardView } =
-    context;
+  const {
+    loggedInUser,
+    setLoggedInUser,
+    dashboardView,
+    setDashboardView,
+    rooms,
+    setRooms,
+  } = context;
   return {
     loggedInUser,
     setLoggedInUser,
     dashboardView,
     setDashboardView,
+    rooms,
+    setRooms,
   };
 };
