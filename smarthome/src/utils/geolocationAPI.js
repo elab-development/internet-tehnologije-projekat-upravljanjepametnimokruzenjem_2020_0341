@@ -7,7 +7,7 @@ export const getLocationFromIP = async () => {
     const res = await axios.get(
       `https://api.geoapify.com/v1/ipinfo?&apiKey=${geolocationAPIKey}`
     );
-    return res.data.city.name;
+    return res.data;
   } catch (error) {
     console.error(error);
   }

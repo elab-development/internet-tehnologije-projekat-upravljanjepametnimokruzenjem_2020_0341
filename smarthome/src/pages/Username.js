@@ -17,10 +17,11 @@ const Username = () => {
       toast.error(<b>Username is required!</b>, { id: 'login' });
       return;
     }
-    const city = await getLocationFromIP();
+    const data = await getLocationFromIP();
     setLoggedInUser({
       username: username,
-      city: city,
+      city: data.city.name,
+      geolocationData: data,
     });
 
 
