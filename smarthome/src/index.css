@@ -54,7 +54,7 @@
   color: #dca11d;
 }
 
-/* Username & Settings */
+/* Username & Settings START */
 .glass {
   background: rgba(255, 255, 255, 0.55);
   border-radius: 16px;
@@ -99,3 +99,24 @@
 input[type='file'] {
   display: none;
 }
+
+
+/* Username & Settings END */
+
+/* TempChanger START */
+
+.range-slider {
+  appearance: none;
+  width: 100%;
+  height: 3rem;
+  background-color: transparent;
+}
+
+.range-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 2rem;
+  height: 3rem;
+  cursor: grab;
+}
+
+/* TempChanger END */
