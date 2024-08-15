@@ -25,7 +25,7 @@ const RoomCard = ({ room }) => {
       room: room.name,
       change: utilityChange,
     });
-    setAllChanges(allChanges);
+    setAllChanges(newChanges);
   };
 
   return (

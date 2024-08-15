@@ -9,6 +9,7 @@ const ChangesFilter = ({ updateFilter }) => {
 
   useEffect(() => {
     updateFilter(lightsFilter, temperatureFilter);
+    // eslint-disable-next-line
   }, [lightsFilter, temperatureFilter]);
 
   return (

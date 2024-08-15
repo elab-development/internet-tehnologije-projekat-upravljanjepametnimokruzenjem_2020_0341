@@ -20,12 +20,12 @@ const TempChanger = ({ room }) => {
     newChanges.push({
       date: dayjs(new Date()).format('YYYY-MM-DD'),
       time: dayjs(new Date()).format('HH:mm:ss'),
-      utility: 'light',
+      utility: 'temperature',
       user: loggedInUser.username,
       room: room.name,
       change: e.target.value,
     });
-    setAllChanges(allChanges);
+    setAllChanges(newChanges);
   };
 
   const handleDragStart = (e) => {
@@ -37,12 +37,12 @@ const TempChanger = ({ room }) => {
     newChanges.push({
       date: dayjs(new Date()).format('YYYY-MM-DD'),
       time: dayjs(new Date()).format('HH:mm:ss'),
-      utility: 'light',
+      utility: 'temperature',
       user: loggedInUser.username,
       room: room.name,
       change: e.currentTarget.value,
     });
-    setAllChanges(allChanges);
+    setAllChanges(newChanges);
   };
 
   const handleDragEnd = (e) => {
