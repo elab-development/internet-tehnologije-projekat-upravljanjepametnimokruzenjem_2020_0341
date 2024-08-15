@@ -1,17 +1,31 @@
 import React, { useState } from 'react';
 import { MdOutlineLightMode } from 'react-icons/md';
+import dayjs from 'dayjs';
 
 import { useDashContext } from '../../hooks/useDashContext.hook';
 
 const RoomCard = ({ room }) => {
   const [lightToggle, setLightToggle] = useState(room.light);
-  const { rooms, setRooms } = useDashContext();
+  const { rooms, setRooms, allChanges, setAllChanges, loggedInUser } =
+    useDashContext();
 
   const handleChange = () => {
     let changedRooms = rooms;
     changedRooms[room.id].light = !changedRooms[room.id].light;
     setRooms(changedRooms);
     setLightToggle(!lightToggle);
+
+    let newChanges = allChanges;
+    let utilityChange = lightToggle ? 'off' : 'on';
+    newChanges.push({
+      date: dayjs(new Date()).format('YYYY-MM-DD'),
+      time: dayjs(new Date()).format('HH:mm:ss'),
+      utility: 'light',
+      user: loggedInUser.username,
+      room: room.name,
+      change: utilityChange,
+    });
+    setAllChanges(allChanges);
   };
 
   return (

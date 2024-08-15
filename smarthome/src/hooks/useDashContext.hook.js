@@ -13,6 +13,10 @@ export const useDashContext = () => {
     setDashboardView,
     rooms,
     setRooms,
+    allChanges,
+    setAllChanges,
+    filteredChanges,
+    setFilteredChanges,
   } = context;
   return {
     loggedInUser,
@@ -21,5 +25,9 @@ export const useDashContext = () => {
     setDashboardView,
     rooms,
     setRooms,
+    allChanges,
+    setAllChanges,
+    filteredChanges,
+    setFilteredChanges,
   };
 };

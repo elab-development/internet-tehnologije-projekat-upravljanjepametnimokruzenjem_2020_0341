@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import dayjs from 'dayjs';
 
 import { temperatureData } from '../../utils/data';
 import { useDashContext } from '../../hooks/useDashContext.hook';
@@ -6,17 +7,42 @@ import { useDashContext } from '../../hooks/useDashContext.hook';
 const TempChanger = ({ room }) => {
   const [currentTemp, setCurrentTemp] = useState(room.temperature);
   const [isDragging, setIsDragging] = useState(false);
-  const { rooms, setRooms } = useDashContext();
+  const { rooms, setRooms, allChanges, setAllChanges, loggedInUser } =
+    useDashContext();
 
   const handleChange = (e) => {
     setCurrentTemp(e.target.value);
     let changedRooms = rooms;
     changedRooms[room.id].temperature = e.target.value;
     setRooms(changedRooms);
+
+    let newChanges = allChanges;
+    newChanges.push({
+      date: dayjs(new Date()).format('YYYY-MM-DD'),
+      time: dayjs(new Date()).format('HH:mm:ss'),
+      utility: 'light',
+      user: loggedInUser.username,
+      room: room.name,
+      change: e.target.value,
+    });
+    setAllChanges(allChanges);
   };
 
   const handleDragStart = (e) => {
-    setIsDragging(true);
+    changedRooms[room.id].temperature = e.currentTarget.value;
+    setRooms(changedRooms);
+    setIsDragging(false);
+
+    let newChanges = allChanges;
+    newChanges.push({
+      date: dayjs(new Date()).format('YYYY-MM-DD'),
+      time: dayjs(new Date()).format('HH:mm:ss'),
+      utility: 'light',
+      user: loggedInUser.username,
+      room: room.name,
+      change: e.currentTarget.value,
+    });
+    setAllChanges(allChanges);
   };
 
   const handleDragEnd = (e) => {

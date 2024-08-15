@@ -1,6 +1,6 @@
 import { FaTemperatureHalf } from 'react-icons/fa6';
 import { FiLogOut, FiSettings } from 'react-icons/fi';
-import { MdOutlineLightMode } from 'react-icons/md';
+import { MdOutlineHistory, MdOutlineLightMode } from 'react-icons/md';
 
 export const sidebarLinks = [
   {
@@ -12,6 +12,11 @@ export const sidebarLinks = [
     key: 'light',
     label: 'Light',
     icon: <MdOutlineLightMode />,
+  },
+  {
+    key: 'history',
+    label: 'Changes History',
+    icon: <MdOutlineHistory />,
   },
 ];
 
