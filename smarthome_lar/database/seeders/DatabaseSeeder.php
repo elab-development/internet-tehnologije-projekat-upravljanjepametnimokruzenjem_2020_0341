@@ -2,8 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Home;
+use App\Models\Resident;
+use App\Models\Room;
+use App\Models\Setting;
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,11 +16,23 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        User::truncate();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        User::factory(2)->create();
+
+        Home::factory(3)
+            ->has(Room::factory(5)
+                ->has(Setting::factory(3)))
+            ->create();
+
+        Resident::factory(3)->create([
+            'home_id' => 1
+        ]);
+        Resident::factory(2)->create([
+            'home_id' => 2
+        ]);
+        Resident::factory(5)->create([
+            'home_id' => 3
         ]);
     }
 }
