@@ -38,7 +38,6 @@ class SettingController extends Controller
     {
         //
     }
-
     public function exportCSV()
     {
         return CSV::download(new SettingsExport, 'settings-history.csv');
