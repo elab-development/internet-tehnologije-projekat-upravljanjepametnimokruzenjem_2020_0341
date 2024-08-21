@@ -25,6 +25,11 @@ Route::get('/homes/{id}', [HomeController::class, 'show']);
 Route::get('/residents', [ResidentController::class, 'index']);
 Route::get('/residents/{id}', [ResidentController::class, 'show']);
 
+Route::get('/rooms', [RoomController::class, 'index']);
+Route::get('/rooms/{id}', [RoomController::class, 'show']);
+
+Route::get('/settings', [SettingController::class, 'index']);
+Route::get('/settings/{id}', [SettingController::class, 'show']);
 
 Route::post('/register', [LoginController::class, 'register']);
 Route::post('/login', [LoginController::class, 'login']);
@@ -39,9 +44,11 @@ oute::group(['middleware' => ['auth:sanctum']], function () {
     Route::resource('/residents', ResidentController::class)
         ->only(['store', 'update', 'destroy']);
 
+    Route::resource('/rooms', RoomController::class)
+        ->only(['store', 'update', 'destroy']);
 
-
-
+    Route::resource('/settings', SettingController::class)
+        ->only(['store', 'update', 'destroy']);
 
     Route::post('/logout', [LoginController::class, 'logout']);
 });
