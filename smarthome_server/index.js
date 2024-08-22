@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import connect from './database/mongoConnect.js';
 import authRouter from './routes/auth.routes.js';
+import typesRouter from './routes/type.routes.js';
 
 dotenv.config();
 
@@ -20,6 +21,7 @@ app.get('/api', (req, res) => {
 });
 
 app.use('/api/auth', authRouter);
+app.use('/api/types', typesRouter);
 
 connect()
   .then(() => {
