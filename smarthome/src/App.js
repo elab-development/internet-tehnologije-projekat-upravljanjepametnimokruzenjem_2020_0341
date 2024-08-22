@@ -1,22 +1,85 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
+import { AuthorizeUser, ProtectedRoute } from './utils/authProtector';
+import DashContextWrapper from './context/DashContext';
 import Home from './pages/Home';
 import Username from './pages/Username';
 import Settings from './pages/Settings';
 import Dashboard from './pages/Dashboard';
 import NotFound from './pages/NotFound';
+import Register from './pages/Register';
+import Password from './pages/Password';
+import Recovery from './pages/Recovery';
+import Reset from './pages/Reset';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Home />,
+  },
+  {
+    path: '/username',
+    element: <Username />,
+  },
+  {
+    path: '/register',
+    element: <Register />,
+  },
+  {
+    path: '/password',
+    element: (
+      <ProtectedRoute>
+        <Password />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/recovery',
+    element: (
+      <ProtectedRoute>
+        <Recovery />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/reset',
+    element: (
+      <ProtectedRoute>
+        <Reset />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/dashboard',
+    element: (
+      <AuthorizeUser>
+        <DashContextWrapper>
+          <Dashboard />
+        </DashContextWrapper>
+      </AuthorizeUser>
+    ),
+  },
+  {
+    path: '/settings',
+    element: (
+      <AuthorizeUser>
+        <DashContextWrapper>
+          <Settings />
+        </DashContextWrapper>
+      </AuthorizeUser>
+    ),
+  },
+  {
+    path: '*',
+    element: <NotFound />,
+  },
+]);
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/username' element={<Username />} />
-        <Route path='/settings' element={<Settings />} />
-        <Route path='/dashboard' element={<Dashboard />} />
-        <Route path='*' element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
+    <main>
+      <RouterProvider router={router}></RouterProvider>
+    </main>
   );
 }
 
