@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import connect from './database/mongoConnect.js';
+import authRouter from './routes/auth.routes.js';
 
 dotenv.config();
 
@@ -17,6 +18,8 @@ const port = process.env.PORT || 8000;
 app.get('/api', (req, res) => {
   res.status(200).json('Server up');
 });
+
+app.use('/api/auth', authRouter);
 
 connect()
   .then(() => {
