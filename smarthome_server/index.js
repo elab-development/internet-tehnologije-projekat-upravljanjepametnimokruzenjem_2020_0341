@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import connect from './database/mongoConnect.js';
 import authRouter from './routes/auth.routes.js';
 import typesRouter from './routes/type.routes.js';
+import roomsRouter from './routes/room.routes.js';
 
 dotenv.config();
 
@@ -22,6 +23,7 @@ app.get('/api', (req, res) => {
 
 app.use('/api/auth', authRouter);
 app.use('/api/types', typesRouter);
+app.use('/api/rooms', roomsRouter);
 
 connect()
   .then(() => {
