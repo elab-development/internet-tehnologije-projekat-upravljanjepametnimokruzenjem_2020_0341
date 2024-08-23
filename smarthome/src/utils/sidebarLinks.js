@@ -1,5 +1,5 @@
 import { FaTemperatureHalf } from 'react-icons/fa6';
-import { FiLogOut, FiSettings } from 'react-icons/fi';
+import { FiLogOut, FiSettings, FiUser } from 'react-icons/fi';
 import { MdOutlineHistory, MdOutlineLightMode } from 'react-icons/md';
 
 export const sidebarLinks = [
@@ -26,6 +26,12 @@ export const sidebarBottomLinks = [
     label: 'Settings',
     icon: <FiSettings />,
     navigation: '/settings',
+  },
+  {
+    key: 'profile',
+    label: 'Profile',
+    icon: <FiUser />,
+    navigation: '/profile',
   },
   {
     key: 'logout',

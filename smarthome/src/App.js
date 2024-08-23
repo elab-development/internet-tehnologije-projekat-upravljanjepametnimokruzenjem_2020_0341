@@ -11,6 +11,7 @@ import Register from './pages/Register';
 import Password from './pages/Password';
 import Recovery from './pages/Recovery';
 import Reset from './pages/Reset';
+import Profile from './pages/Profile';
 
 const router = createBrowserRouter([
   {
@@ -65,6 +66,16 @@ const router = createBrowserRouter([
       <AuthorizeUser>
         <DashContextWrapper>
           <Settings />
+        </DashContextWrapper>
+      </AuthorizeUser>
+    ),
+  },
+  {
+    path: '/profile',
+    element: (
+      <AuthorizeUser>
+        <DashContextWrapper>
+          <Profile />
         </DashContextWrapper>
       </AuthorizeUser>
     ),
