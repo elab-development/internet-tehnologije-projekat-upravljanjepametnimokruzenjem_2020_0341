@@ -1,18 +1,16 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaLocationDot, FaRegUser, FaUsersLine } from 'react-icons/fa6';
 
 import { useDashContext } from '../hooks/useDashContext.hook';
+import { getUsername } from '../utils/helpers';
 import SettingsMap from '../components/settings/SettingsMap';
 import IconInput from '../components/shared/IconInput';
+import axios from 'axios';
 
 const Settings = () => {
   const navigate = useNavigate();
-  const { loggedInUser } = useDashContext();
-
-  useEffect(() => {
-    console.log(loggedInUser?.geolocationData);
-  }, [loggedInUser]);
+  const { geolocationData, loggedInUser } = useDashContext();
 
   return (
     <div className='bg-primary'>
@@ -45,9 +43,9 @@ const Settings = () => {
               type='text'
               placeholder='Location'
               value={
-                loggedInUser?.geolocationData?.city.name +
+                geolocationData?.city.name +
                 ', ' +
-                loggedInUser?.geolocationData?.country.name
+                geolocationData?.country.name
               }
               icon={
                 <FaLocationDot className='w-5 h-5 absolute ml-3 pointer-events-none' />

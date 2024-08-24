@@ -9,6 +9,8 @@ export const useDashContext = () => {
   const {
     loggedInUser,
     setLoggedInUser,
+    geolocationData,
+    setGeolocationData,
     dashboardView,
     setDashboardView,
     rooms,
@@ -21,6 +23,8 @@ export const useDashContext = () => {
   return {
     loggedInUser,
     setLoggedInUser,
+    geolocationData,
+    setGeolocationData,
     dashboardView,
     setDashboardView,
     rooms,

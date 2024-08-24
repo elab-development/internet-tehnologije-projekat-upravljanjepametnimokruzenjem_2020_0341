@@ -15,11 +15,11 @@ L.Icon.Default.mergeOptions({
 });
 
 const SettingsMap = () => {
-  const { loggedInUser } = useDashContext();
+  const { geolocationData } = useDashContext();
 
   const position1 = [
-    loggedInUser?.geolocationData?.location?.latitude || 44.7971,
-    loggedInUser?.geolocationData?.location?.longitude || 20.4944,
+    geolocationData?.location?.latitude || 44.7971,
+    geolocationData?.location?.longitude || 20.4944,
   ];
   const position2 = [44.7971, 20.4944];
 
