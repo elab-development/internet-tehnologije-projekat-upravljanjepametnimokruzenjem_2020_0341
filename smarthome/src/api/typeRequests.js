@@ -17,15 +17,26 @@ export const createType = async (data) => {
 };
 
 // Get All Types
-export const getTypes = async () => {
+export const getTypes = async (name = null) => {
   const token = localStorage.getItem('token');
   try {
-    const { data } = await axios.get('/api/types', {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    return { data };
+    let res = {};
+
+    if (name) {
+      res = await axios.get(`/api/types?name=${name}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+    } else {
+      res = await axios.get('/api/types', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+    }
+
+    return res.data;
   } catch (error) {
     return { error: error.message };
   }

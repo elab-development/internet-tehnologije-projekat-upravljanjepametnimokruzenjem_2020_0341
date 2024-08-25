@@ -36,8 +36,15 @@ export const createType = async (req, res) => {
 // @route       GET /api/types
 // @access      Private
 export const getTypes = async (req, res) => {
+  const name = req.query.name;
+  let types = [];
+
   try {
-    const types = await Type.find({});
+    if (name && name !== '') {
+        types = await Type.find({ name: { $regex: name, $options: 'i' } });
+      } else {
+        types = await Type.find({});
+      }
 
     if (!types) {
       return res.status(404).send({

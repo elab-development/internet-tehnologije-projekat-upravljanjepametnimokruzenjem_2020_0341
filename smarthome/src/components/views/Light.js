@@ -1,10 +1,24 @@
-import React from 'react';
-import { useDashContext } from '../../hooks/useDashContext.hook';
+import React, { useEffect, useState } from 'react';
+
 import RoomCard from '../views_subcomponents/RoomCard';
+import { getTypes } from '../../api/typeRequests';
+import { getUtilitiesByType } from '../../api/utilityRequests';
 
 
 const Light = () => {
-  const { rooms } = useDashContext();
+  const [rooms, setRooms] = useState([]);
+
+  useEffect(() => {
+    const fetchRoomsByType = async () => {
+      const type = await getTypes('light');
+      const typeId = type[0]._id;
+
+      const utlities = await getUtilitiesByType(typeId);
+      setRooms(utlities.data);
+    };
+
+    fetchRoomsByType();
+  }, []);
 
   return (
     <div className='my-10'>
