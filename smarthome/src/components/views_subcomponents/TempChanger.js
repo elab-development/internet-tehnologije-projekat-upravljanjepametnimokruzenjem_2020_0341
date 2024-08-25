@@ -29,6 +29,7 @@ const TempChanger = ({ room }) => {
   };
 
   const handleDragStart = (e) => {
+    let changedRooms = rooms;
     changedRooms[room.id].temperature = e.currentTarget.value;
     setRooms(changedRooms);
     setIsDragging(false);
