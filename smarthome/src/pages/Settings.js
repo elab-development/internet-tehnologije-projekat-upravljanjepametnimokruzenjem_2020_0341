@@ -3,10 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { FaLocationDot, FaRegUser, FaUsersLine } from 'react-icons/fa6';
 
 import { useDashContext } from '../hooks/useDashContext.hook';
-import { getUsername } from '../utils/helpers';
+
 import SettingsMap from '../components/settings/SettingsMap';
 import IconInput from '../components/shared/IconInput';
-import axios from 'axios';
+
 
 const Settings = () => {
   const navigate = useNavigate();

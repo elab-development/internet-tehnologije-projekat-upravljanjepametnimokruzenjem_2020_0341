@@ -1,31 +1,19 @@
 import React, { useState } from 'react';
-import dayjs from 'dayjs';
+import { TfiSave } from 'react-icons/tfi';
 
 import { temperatureData } from '../../utils/data';
-import { useDashContext } from '../../hooks/useDashContext.hook';
+import { updateUtility } from '../../api/utilityRequests';
 
 const TempChanger = ({ room }) => {
-  const [currentTemp, setCurrentTemp] = useState(room.temperature);
+  const [currentTemp, setCurrentTemp] = useState(parseInt(room.value));
+  const [changed, setChanged] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
-  const { rooms, setRooms, allChanges, setAllChanges, loggedInUser } =
-    useDashContext();
+  
 
   const handleChange = (e) => {
     setCurrentTemp(e.target.value);
-    let changedRooms = rooms;
-    changedRooms[room.id].temperature = e.target.value;
-    setRooms(changedRooms);
-
-    let newChanges = allChanges;
-    newChanges.push({
-      date: dayjs(new Date()).format('YYYY-MM-DD'),
-      time: dayjs(new Date()).format('HH:mm:ss'),
-      utility: 'temperature',
-      user: loggedInUser.username,
-      room: room.name,
-      change: e.target.value,
-    });
-    setAllChanges(newChanges);
+    setChanged(true);
+  };
   };
 
   const handleDragStart = (e) => {
@@ -34,30 +22,27 @@ const TempChanger = ({ room }) => {
     setRooms(changedRooms);
     setIsDragging(false);
 
-    let newChanges = allChanges;
-    newChanges.push({
-      date: dayjs(new Date()).format('YYYY-MM-DD'),
-      time: dayjs(new Date()).format('HH:mm:ss'),
-      utility: 'temperature',
-      user: loggedInUser.username,
-      room: room.name,
-      change: e.currentTarget.value,
-    });
-    setAllChanges(newChanges);
+    const handleUpdateTemp = async () => {
+      try {
+        const tempStr = currentTemp.toString();
+        await updateUtility(room._id, { value: tempStr });
+        setChanged(false);
+      } catch (error) {
+        console.error(error);
+      }
   };
 
   const handleDragEnd = (e) => {
     setCurrentTemp(e.currentTarget.value);
-    let changedRooms = rooms;
-    changedRooms[room.id].temperature = e.currentTarget.value;
-    setRooms(changedRooms);
     setIsDragging(false);
+    setChanged(true);
   };
 
   return (
+    <div className='flex gap-1'>
     <div className='flex justify-between items-center w-80 bg-tertiary p-2 rounded-md'>
       <div className='flex flex-col'>
-        <h2 className='font-semibold'>{room.name}</h2>
+        <h2 className='font-semibold'>{room.room.name}</h2>
       </div>
       <div className='relative bg-white flex items-center rounded'>
         <input
@@ -93,7 +78,17 @@ const TempChanger = ({ room }) => {
             °C
           </span>
         </div>
+        </div>
       </div>
+      {changed && (
+        <button
+          type='button'
+          onClick={handleUpdateTemp}
+          className='bg-primary text-white px-6 py-2 text-2xl font-bold rounded-md'
+        >
+          <TfiSave />
+        </button>
+      )}
     </div>
   );
 };

@@ -1,9 +1,23 @@
-import React from 'react';
-import { useDashContext } from '../../hooks/useDashContext.hook';
+import React, { useEffect, useState } from 'react';
+import { getUtilitiesByType } from '../../api/utilityRequests';
+import { getTypes } from '../../api/typeRequests';
 import TempChanger from '../views_subcomponents/TempChanger';
 
 const Temperature = () => {
-  const { rooms } = useDashContext();
+  const [rooms, setRooms] = useState([]);
+
+  useEffect(() => {
+    const fetchRoomsByType = async () => {
+      const type = await getTypes('temperature');
+      const typeId = type[0]._id;
+
+      const utlities = await getUtilitiesByType(typeId);
+      console.log(utlities);
+      setRooms(utlities.data);
+    };
+
+    fetchRoomsByType();
+  }, []);
 
   return (
     <div className='my-10'>

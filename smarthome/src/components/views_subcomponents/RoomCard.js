@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { MdOutlineLightMode } from 'react-icons/md';
-import dayjs from 'dayjs';
 
-import { useDashContext } from '../../hooks/useDashContext.hook';
+
+
 import { updateUtility } from '../../api/utilityRequests';
 
 const RoomCard = ({ room }) => {
   const [lightToggle, setLightToggle] = useState(
     room.value === 'true' ? true : false
   );
-  const { loggedInUser } = useDashContext();
+  
 
   const handleChange = async () => {
     if (room.value === 'false') {
