@@ -4,6 +4,7 @@ import { TfiSave } from 'react-icons/tfi';
 import { temperatureData } from '../../utils/data';
 import { updateUtility } from '../../api/utilityRequests';
 import { useDashContext } from '../../hooks/useDashContext.hook';
+import { createChange } from '../../api/changeRequests';
 
 const TempChanger = ({ room }) => {
   const [currentTemp, setCurrentTemp] = useState(parseInt(room.value));
@@ -27,6 +28,12 @@ const TempChanger = ({ room }) => {
       try {
         const tempStr = currentTemp.toString();
         await updateUtility(room._id, { value: tempStr });
+        await createChange({
+          text: `${loggedInUser.username} changed the temperature to ${tempStr}°C in the ${room.room.name}`,
+          utility: room._id,
+          user: loggedInUser._id,
+          date: new Date(),
+        });
         setChanged(false);
       } catch (error) {
         console.error(error);

@@ -23,7 +23,7 @@ export const sidebarLinks = [
   {
     key: 'history',
     label: 'Changes History',
-    scope: 'public',
+    scope: 'admin',
     icon: <MdOutlineHistory />,
   },
   {

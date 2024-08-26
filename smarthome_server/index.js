@@ -6,6 +6,7 @@ import authRouter from './routes/auth.routes.js';
 import typesRouter from './routes/type.routes.js';
 import roomsRouter from './routes/room.routes.js';
 import utilitiesRouter from './routes/utility.routes.js';
+import changesRouter from './routes/change.routes.js';
 
 dotenv.config();
 
@@ -26,6 +27,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/types', typesRouter);
 app.use('/api/rooms', roomsRouter);
 app.use('/api/utilities', utilitiesRouter);
+app.use('/api/changes', changesRouter);
 
 connect()
   .then(() => {
