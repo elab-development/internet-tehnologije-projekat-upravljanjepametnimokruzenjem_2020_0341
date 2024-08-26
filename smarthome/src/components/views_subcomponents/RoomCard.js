@@ -4,12 +4,13 @@ import { MdOutlineLightMode } from 'react-icons/md';
 
 
 import { updateUtility } from '../../api/utilityRequests';
+import { useDashContext } from '../../hooks/useDashContext.hook';
 
 const RoomCard = ({ room }) => {
   const [lightToggle, setLightToggle] = useState(
     room.value === 'true' ? true : false
   );
-  
+  const { loggedInUser } = useDashContext();
 
   const handleChange = async () => {
     if (room.value === 'false') {
@@ -45,24 +46,24 @@ const RoomCard = ({ room }) => {
       </div>
       <div className='my-2 p-4 flex flex-row justify-between items-center'>
       <h2 className='font-semibold'>{room.room.name}</h2>
-        <div
-          className={`md:w-14 md:h-7 w-12 h-6 flex items-center
-            ${
-              lightToggle ? 'bg-primary' : 'bg-gray-300'
-            } rounded-full p-1 cursor-pointer
-            `}
-          onClick={handleChange}
-        >
+      {loggedInUser.role === 'child' && room.childrenAllowed && (
           <div
-            className={`flex items-center justify-center ${
-              lightToggle ? 'bg-secondary' : 'bg-white'
-            } md:w-6 md:h-6 h-5 w-5 rounded-full shadow-md transition transform ${
-              lightToggle ? ' translate-x-6' : ''
-            }`}
+          className={`md:w-14 md:h-7 w-12 h-6 flex items-center
+            ${lightToggle ? 'bg-primary' : 'bg-gray-300'} rounded-full p-1 cursor-pointer
+            `}
+                     onClick={handleChange}
           >
-            <MdOutlineLightMode className='text-white' />
+            <div
+              className={`flex items-center justify-center ${
+                lightToggle ? 'bg-secondary' : 'bg-white'
+              } md:w-6 md:h-6 h-5 w-5 rounded-full shadow-md transition transform ${
+                lightToggle ? ' translate-x-6' : ''
+              }`}
+            >
+              <MdOutlineLightMode className='text-white' />
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

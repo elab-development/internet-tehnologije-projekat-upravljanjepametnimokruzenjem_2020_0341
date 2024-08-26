@@ -17,7 +17,7 @@ export const usernameValidate = async (values) => {
 };
 
 export const passwordValidate = async (values) => {
-  const errors = passwordVerify({}, values);
+  const errors = passwordSimpleVerify({}, values);
   return errors;
 };
 
@@ -71,6 +71,15 @@ const passwordVerify = (error = {}, values) => {
     error.password = toast.error(
       'Password must have at least one special character!'
     );
+  }
+
+  return error;
+};
+
+
+const passwordSimpleVerify = (error = {}, values) => {
+  if (!values.password) {
+    error.password = toast.error('Password is Required!');
   }
 
   return error;

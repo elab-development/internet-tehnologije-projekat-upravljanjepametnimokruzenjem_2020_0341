@@ -3,12 +3,13 @@ import { TfiSave } from 'react-icons/tfi';
 
 import { temperatureData } from '../../utils/data';
 import { updateUtility } from '../../api/utilityRequests';
+import { useDashContext } from '../../hooks/useDashContext.hook';
 
 const TempChanger = ({ room }) => {
   const [currentTemp, setCurrentTemp] = useState(parseInt(room.value));
   const [changed, setChanged] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
-  
+  const { loggedInUser } = useDashContext();
 
   const handleChange = (e) => {
     setCurrentTemp(e.target.value);
@@ -55,6 +56,13 @@ const TempChanger = ({ room }) => {
           onMouseUp={handleDragEnd}
           className='range-slider'
           style={{ zIndex: isDragging ? 1 : 2 }}
+          disabled={
+            loggedInUser.role === 'child'
+              ? room.childrenAllowed
+                ? false
+                : true
+              : false
+          }
         />
         {/* <div className='absolute h-full bg-tertiary rounded w-[70%]'></div> */}
         <div

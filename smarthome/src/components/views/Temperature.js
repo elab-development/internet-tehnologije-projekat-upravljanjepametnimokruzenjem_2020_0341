@@ -12,7 +12,6 @@ const Temperature = () => {
       const typeId = type[0]._id;
 
       const utlities = await getUtilitiesByType(typeId);
-      console.log(utlities);
       setRooms(utlities.data);
     };
 

@@ -7,7 +7,8 @@ import { sidebarBottomLinks, sidebarLinks } from '../../utils/sidebarLinks';
 
 const Sidebar = () => {
     const navigate = useNavigate();
-  const { dashboardView, setDashboardView, setLoggedInUser } = useDashContext();
+    const { dashboardView, setDashboardView, loggedInUser, setLoggedInUser } =
+    useDashContext();
 
   return (
     <div className='w-60 p-1 flex flex-col text-white bg-[#135993] h-screen'>
@@ -17,15 +18,51 @@ const Sidebar = () => {
       </div>
       <div className='flex-1 mt-3'>
         {sidebarLinks.map((item) => (
-          <div
-            key={item.key}
-            onClick={() => setDashboardView(item.key)}
-            className={`flex gap-2 items-center font-light px-3 py-2 hover:bg-[#ddf2ff] hover:text-[#135993] hover:no-underline cursor-pointer rounded-md ${
-              dashboardView === item.key && 'bg-[#588bc9]'
-            }`}
-          >
-            <span className='text-xl'>{item.icon}</span>
-            {item.label}
+           <div key={item.key}>
+           {/* Public */}
+           {item.scope === 'public' && (
+             <div
+               onClick={() => setDashboardView(item.key)}
+               className={`flex gap-2 items-center font-light px-3 py-2 hover:bg-[#ddf2ff] hover:text-[#135993] hover:no-underline cursor-pointer rounded-md ${
+                 dashboardView === item.key && 'bg-[#588bc9]'
+               }`}
+             >
+               <span className='text-xl'>{item.icon}</span>
+               {item.label}
+             </div>
+           )}
+
+           {/* Parent */}
+           {item.scope !== 'public' &&
+             item.scope === 'parent' &&
+             (loggedInUser?.role === 'parent' ||
+               loggedInUser?.role === 'admin') && (
+               <div
+                 onClick={() => setDashboardView(item.key)}
+                 className={`flex gap-2 items-center font-light px-3 py-2 hover:bg-[#ddf2ff] hover:text-[#135993] hover:no-underline cursor-pointer rounded-md ${
+                   dashboardView === item.key && 'bg-[#588bc9]'
+                 }`}
+               >
+                 <span className='text-xl'>{item.icon}</span>
+                 {item.label}
+               </div>
+             )}
+
+           {/* Admin */}
+           {item.scope !== 'public' &&
+             item.scope !== 'parent' &&
+             item.scope === 'admin' &&
+             loggedInUser?.role === 'admin' && (
+               <div
+                 onClick={() => setDashboardView(item.key)}
+                 className={`flex gap-2 items-center font-light px-3 py-2 hover:bg-[#ddf2ff] hover:text-[#135993] hover:no-underline cursor-pointer rounded-md ${
+                   dashboardView === item.key && 'bg-[#588bc9]'
+                 }`}
+               >
+                 <span className='text-xl'>{item.icon}</span>
+                 {item.label}
+               </div>
+             )}
           </div>
         ))}
       </div>

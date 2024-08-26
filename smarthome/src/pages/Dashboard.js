@@ -6,6 +6,7 @@ import Sidebar from '../components/shared/Sidebar';
 import Temperature from '../components/views/Temperature';
 import Light from '../components/views/Light';
 import History from '../components/views/History';
+import Privileges from '../components/views/Privileges';
 import Footer from '../components/shared/Footer';
 
 const Dashboard = () => {
@@ -23,6 +24,7 @@ const Dashboard = () => {
             {dashboardView === 'temperature' && <Temperature />}
             {dashboardView === 'light' && <Light />}
             {dashboardView === 'history' && <History />}
+            {dashboardView === 'privileges' && <Privileges />}
           </div>
           <div>
             <Footer />
