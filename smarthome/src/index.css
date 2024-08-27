@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #135993;
+  --secondary: #588bc9;
+  --tertiary: #ddf2ff;
+  --elements: #dca11d;
+}
+
+* {
+  font-family: 'Roboto', sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+.bg-background {
+  background-image: url('./assets/background.jpg');
+  background-position: bottom;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.bg-primary {
+  background-color: #135993;
+}
+.bg-secondary {
+  background-color: #588bc9;
+}
+.bg-tertiary {
+  background-color: #ddf2ff;
+}
+.bg-elements {
+  background-color: #dca11d;
+}
+
+.overlayshadow {
+  background: rgba(0, 0, 0, 0.5);
+}
+.text-primary {
+  color: #135993;
+}
+.text-secondary {
+  color: #588bc9;
+}
+.text-tertiary {
+  color: #ddf2ff;
+}
+.text-elements {
+  color: #dca11d;
+}
+
+/* Username & Settings START */
+.glass {
+  background: rgba(255, 255, 255, 0.55);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px #4747470b;
+  backdrop-filter: blur(7.1px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  min-height: 85%;
+
+  @apply border-4 border-gray-50 shrink-0 h-3/4 w-[30%] rounded-3xl py-20 px-7 min-w-max;
+}
+
+.glass-settings {
+  background: rgba(255, 255, 255, 0.55);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px #4747470b;
+  backdrop-filter: blur(7.1px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  min-height: 85%;
+
+  @apply border-4 border-gray-50 shrink-0 h-3/4 w-[70%] rounded-3xl py-10 px-7 min-w-max;
+}
+
+
+.profile_img {
+  @apply border-4 border-gray-100 w-[135px] h-[135px] rounded-full shadow-lg cursor-pointer;
+  @apply hover:border-gray-200;
+}
+
+.textbox {
+  @apply border-0 px-5 py-4 rounded-xl  shadow-sm text-lg;
+  @apply focus:outline-none;
+}
+
+.btn {
+  @apply border bg-[#135993] w-3/4 py-4 rounded-lg text-gray-50 text-xl shadow-sm text-center;
+}
+
+.btn:hover {
+  background-color: #dca11d;
+}
+
+input[type='file'] {
+  display: none;
+}
+
+
+/* Username & Settings END */
+
+/* TempChanger START */
+
+.range-slider {
+  appearance: none;
+  width: 100%;
+  height: 3rem;
+  background-color: transparent;
+}
+
+.range-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 2rem;
+  height: 3rem;
+  cursor: grab;
+}
+
+/* TempChanger END */
+
+
+/* Loader Spinner START */
+
+.loader-parent {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  display: flex;
+  border-radius: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 6px solid #135993;
+  border-left-color: transparent;
+  animation: loader 1.2s linear infinite;
+}
+
+@keyframes loader {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Loader Spinner END */
