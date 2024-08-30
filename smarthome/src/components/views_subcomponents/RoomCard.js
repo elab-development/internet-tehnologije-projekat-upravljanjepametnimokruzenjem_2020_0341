@@ -83,6 +83,7 @@ const RoomCard = ({ room }) => {
             className={`md:w-14 md:h-7 w-12 h-6 flex items-center
 ${lightToggle ? 'bg-primary' : 'bg-gray-300'} rounded-full p-1 cursor-pointer
 `}
+            onClick={handleChange}
           >
             <div
               className={`flex items-center justify-center ${

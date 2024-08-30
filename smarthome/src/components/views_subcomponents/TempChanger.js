@@ -16,28 +16,9 @@ const TempChanger = ({ room }) => {
     setCurrentTemp(e.target.value);
     setChanged(true);
   };
-  };
 
   const handleDragStart = (e) => {
-    let changedRooms = rooms;
-    changedRooms[room.id].temperature = e.currentTarget.value;
-    setRooms(changedRooms);
-    setIsDragging(false);
-
-    const handleUpdateTemp = async () => {
-      try {
-        const tempStr = currentTemp.toString();
-        await updateUtility(room._id, { value: tempStr });
-        await createChange({
-          text: `${loggedInUser.username} changed the temperature to ${tempStr}°C in the ${room.room.name}`,
-          utility: room._id,
-          user: loggedInUser._id,
-          date: new Date(),
-        });
-        setChanged(false);
-      } catch (error) {
-        console.error(error);
-      }
+    setIsDragging(true);
   };
 
   const handleDragEnd = (e) => {
@@ -46,6 +27,22 @@ const TempChanger = ({ room }) => {
     setChanged(true);
   };
 
+  const handleUpdateTemp = async () => {
+    try {
+      const tempStr = currentTemp.toString();
+      await updateUtility(room._id, { value: tempStr });
+      await createChange({
+        text: `${loggedInUser.username} changed the temperature to ${tempStr}°C in the ${room.room.name}`,
+        utility: room._id,
+        user: loggedInUser._id,
+        date: new Date(),
+      });
+      setChanged(false);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
   return (
     <div className='flex gap-1'>
     <div className='flex justify-between items-center w-80 bg-tertiary p-2 rounded-md'>
